@@ -81,7 +81,7 @@ function pow(base, exponent) {
     if(exponent === 1) return base;
 
     if(exponent < 0){
-        return base * 1.0/(pow(base, exponent + 1));
+        return  1.0/(pow(base, -exponent));
     } else {
         return base * pow(base, exponent - 1);
 
@@ -169,16 +169,12 @@ function flatten(data) {
 // fileFinder(desktop, 'everlong.flac');            // => true
 // fileFinder(desktop, 'sequoia.jpeg');             // => false
 function fileFinder(directories, targetFile) {
-    if(Object.keys(directories).includes(targetFile) || Object.values(directories).includes(targetFile)){
-        return true;
-    }
-    
-    let keys = Object.keys(directories);
-    for(let i = 0; i < keys.length; i++){
-        if(typeof keys[i] === 'object'){
-            fileFinder(directories[keys[i]], targetFile);
+    for(let key in directories){
+        if(key === targetFile || fileFinder(directories[key], targetFile)){
+            return true;
         }
     }
+        return false;
 }
 
 
