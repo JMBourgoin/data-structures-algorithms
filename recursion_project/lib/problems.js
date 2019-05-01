@@ -169,7 +169,16 @@ function flatten(data) {
 // fileFinder(desktop, 'everlong.flac');            // => true
 // fileFinder(desktop, 'sequoia.jpeg');             // => false
 function fileFinder(directories, targetFile) {
+    if(Object.keys(directories).includes(targetFile) || Object.values(directories).includes(targetFile)){
+        return true;
+    }
     
+    let keys = Object.keys(directories);
+    for(let i = 0; i < keys.length; i++){
+        if(typeof keys[i] === 'object'){
+            fileFinder(directories[keys[i]], targetFile);
+        }
+    }
 }
 
 
