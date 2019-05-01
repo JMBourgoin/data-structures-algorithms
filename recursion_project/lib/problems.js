@@ -77,7 +77,15 @@ function reverseString(str) {
 // pow(3, 4)    // => 81
 // pow(2, -5)   // => 0.03125
 function pow(base, exponent) {
+    if(exponent === 0) return 1;
+    if(exponent === 1) return base;
 
+    if(exponent < 0){
+        return base * 1.0/(pow(base, exponent + 1));
+    } else {
+        return base * pow(base, exponent - 1);
+
+    } 
 }
 
 
@@ -110,7 +118,15 @@ function pow(base, exponent) {
 //     2-dimensional array: [['some data']]
 //     3-dimensional array: [[['some data']]]
 function flatten(data) {
-
+    let newArr = [];
+    data.forEach(ele => {
+        if(typeof ele === 'object'){
+            newArr = newArr.concat(flatten(ele));
+        } else {
+            newArr.push(ele);
+        }
+    })
+    return newArr;
 }
 
 // Write a function, fileFinder(directories, targetFile), that accepts an object representing directories and a string respresenting a filename.
@@ -153,7 +169,7 @@ function flatten(data) {
 // fileFinder(desktop, 'everlong.flac');            // => true
 // fileFinder(desktop, 'sequoia.jpeg');             // => false
 function fileFinder(directories, targetFile) {
-
+    
 }
 
 
