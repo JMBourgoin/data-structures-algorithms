@@ -55,8 +55,8 @@ function sumArray(array) {
 function reverseString(str) {
     if(str.length === 0) return "";
     if(str.length === 1) return str;
-    const shift = str.shift();
-    return reverseString(str).concat(shift);
+    const shift = str[0];
+    return reverseString(str.slice(1)).concat(shift);
 }
 
 
