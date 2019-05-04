@@ -41,13 +41,16 @@ function lucasNumberMemo(n, memo = {}) {
 // minChange([1, 5, 10, 25], 100)   // => 4, because 25 + 25 + 25 + 25 = 100
 function minChange(coins, amount, memo = {}) {
     if(amount === 0) return 0;
-    const purse = coins.filter((coin) => {
-        return coin <= amount;
+    if(memo[amount] in memo) return memo[amount];
+    
+    let arr = [];
+    coins.forEach(coin => {
+        if(coin <= amount){
+            arr.push(minChange(coins, amount - coin, memo) + 1);
+        }
     });
-    const maxCoin = Math.max(...purse);
-    if(maxCoin === amount) return 1;
-
-    return (1 + minChange(purse, amount - maxCoin, memo));
+    memo[amount] = Math.min(...arr);
+    return Math.min(...arr);
 }
 
 
