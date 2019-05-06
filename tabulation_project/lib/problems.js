@@ -39,10 +39,14 @@ function stepper(nums, memo = {}) {
     let key = nums.length;
     if(key in memo) return memo[key];
     if(nums.length === 0) return true;
-    for(let i = 0; i <= nums[0]; i++){
-        memo[key] = true;
-        stepper(nums.slice(i), memo);
+    let step = nums[0];
+    for(let i = 1; i <= step; i++){
+        if (stepper(nums.slice(i), memo)){
+            memo[nums.slice(i).length] = true;
+            return true;
+        } 
     }
+    memo[key] = false;
     return false;
 }
 
