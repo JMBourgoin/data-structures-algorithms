@@ -38,7 +38,7 @@
 function stepper(nums, memo = {}) {
     let key = nums.length;
     if(key in memo) return memo[key];
-    if(nums.length === 0) return true;
+    if(nums.length === 1) return true;
     let step = nums[0];
     for(let i = 1; i <= step; i++){
         if (stepper(nums.slice(i), memo)){
@@ -61,7 +61,17 @@ function stepper(nums, memo = {}) {
 // maxNonAdjacentSum([2, 7, 9, 3, 4])   // => 15, because 2 + 9 + 4
 // maxNonAdjacentSum([4,2,1,6])         // => 10, because 4 + 6 
 function maxNonAdjacentSum(nums) {
-
+    if(nums.length === 0) return 0;
+    let table = new Array(nums.length).fill(0);
+    table[0] = nums[0];
+    
+    for(let i = 1; i < nums.length; i++){
+        const includeLeftNon = table[i - 2] === undefined ? 0 : table[i - 2];
+        const withLeft = includeLeftNon + nums[i];
+        const without = table[i - 1];
+        table[i] = Math.max(withLeft, without);
+    }
+    return table[table.length - 1];
 }
 
 
