@@ -121,3 +121,23 @@ var climbStairs = function(n) {
      return table[table.length - 1]
      };
  
+     var minPathSum = function(grid) {
+        let y = grid.length;
+        let x = grid[0].length;
+        let table = new Array(y).fill().map(() => new Array(x).fill(Infinity));
+        
+        table[0][0] = grid[0][0];
+        
+        for(let i = 0; i < y; i++){
+            for(let j = 0; j < x; j++){
+                if(j < x - 1){
+                    table[i][j + 1] = Math.min(table[i][j] + grid[i][j + 1], table[i][j+1])
+                }
+                if(i < y - 1){
+                    table[i + 1][j] = Math.min(table[i][j] + grid[i + 1][j], table[i + 1][j])
+                }
+                
+            }
+        }
+        return table[y - 1][x - 1];
+    };
