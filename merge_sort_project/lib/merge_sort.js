@@ -13,7 +13,6 @@ let newArr = [];
 }
 
 function mergeSort(array) {
-    if(array === undefined) return [];
     if(array.length <= 1) return array;
 
     const pivot = Math.floor(array.length / 2);
@@ -21,7 +20,7 @@ function mergeSort(array) {
     const right = array.slice(pivot);
     const leftSorted = mergeSort(left);
     const rightSorted = mergeSort(right);
-    merge(leftSorted, rightSorted);
+    return merge(leftSorted, rightSorted);
 }
 
 module.exports = {
