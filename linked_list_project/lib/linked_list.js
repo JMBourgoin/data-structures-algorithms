@@ -94,27 +94,76 @@ class LinkedList {
 
     // TODO: Implement the removeHead method here
     removeHead() {
+    
+    let oldHead = this.head;
+        if(this.length === 0) return undefined;
+        if(this.length === 1){
+            this.head = null;
+            this.tail = null;
+            this.length -= 1;
+            return oldHead;
+        }
+
+        let newHead = this.head.next;
+        this.head = newHead;
+        this.length -= 1;
+        return oldHead;
 
     }
 
     // TODO: Implement the contains method here
     contains(target) {
-
+        if(this.length === 0) return false;
+        let node = this.head;
+        for(let i = 1; i <= this.length; i++){
+            if(node.value === target) return true;
+            node = node.next;
+        }
+        return false;
     }
 
     // TODO: Implement the get method here
     get(index) {
-
+        if(index >= this.length) return null;
+        let node = this.head;
+        for(let i = 0; i <= this.length; i++){
+            if(i === index) return node;
+            node = node.next;
+        }
     }
 
     // TODO: Implement the set method here
     set(index, val) {
-
+        if(this.length <= index) return false;
+        let node = this.head;
+        for(let i = 0; i < this.length; i++){
+            if(i === index){
+                node.value = val;
+                return true;
+            }
+            node = node.next;
+        }
     }
 
     // TODO: Implement the insert method here
     insert(index, val) {
-
+        if(index >= this.length) return false;
+        let node = this.head;
+        let parent = this.head;
+        for(let i = 0; i < this.length; i++){
+            if(i === index - 1){
+                parent = node;
+                node = node.next;
+            } else if(i === index){
+               let newNode = new Node(val);
+                parent.next = newNode;
+                newNode.next = node;
+                this.length += 1;
+                return true;
+            } else {
+                node = node.next;
+            }
+        }
     }
 
     // TODO: Implement the remove method here
