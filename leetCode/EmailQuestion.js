@@ -14,21 +14,8 @@ var numUniqueEmails = function (emails) {
             }
         }
 
-        let dotCount = 0;
-        let str2 = '';
-
-        for (let i = split[1].length - 1; i >= 0; i--) {
-            if (split[1][i] === '.' && dotCount > 0) {
-                continue
-            } else if (split[1][i] === '.' && dotCount === 0) {
-                dotCount += 1;
-                str2 = split[1][i] + str2;
-
-            } else {
-                str2 = split[1][i] + str2;
-            }
-        }
-        let address = str + '@' + str2;
+        
+        let address = str + '@' + split[1];
         simplifiedAddresses[address] = true;
     });
     return Object.keys(simplifiedAddresses).length;
