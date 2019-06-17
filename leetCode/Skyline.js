@@ -4,8 +4,9 @@ var maxIncreaseKeepingSkyline = function (grid) {
 
     for (let i = 0; i < grid.length; i++) {
         for (let j = 0; j < grid.length; j++) {
-            row_maxes[i] = Math.max(row_maxes[i], grid[i][j]);
+            row_maxes[i] = Math.max(row_maxes[i], grid[j][i]);
             column_maxes[j] = Math.max(column_maxes[j], grid[j][i]);
+
         }
     }
 
@@ -20,3 +21,5 @@ var maxIncreaseKeepingSkyline = function (grid) {
     return ans;
 
 };
+
+maxIncreaseKeepingSkyline([[3, 0, 8, 4], [2, 4, 5, 7], [9, 2, 6, 3], [0, 3, 1, 0]]);
